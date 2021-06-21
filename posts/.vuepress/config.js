@@ -1,7 +1,7 @@
 module.exports = {
-  title: 'Soonspacejs Blog',
+  title: 'SoonSpacejs Blog',
   theme: 'simple',
   themeConfig: {
-    author: 'Soonspacejs Team', // will display on the page footer
+    author: 'SoonSpacejs Team', // will display on the page footer
   },
 };
