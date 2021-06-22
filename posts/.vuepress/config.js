@@ -1,6 +1,6 @@
 module.exports = {
   title: 'SoonSpacejs Blog',
-  base: '/',
+  base: '/blog/',
   dest: 'dist',
   theme: 'simple',
   themeConfig: {
