@@ -1,6 +1,13 @@
 ---
-title: Group 对象与坐标
+title: 在设计时 Group 想要做什么？
+date: 2021-06-23
+author: 姜旗
 ---
+
+<!-- # mklml
+## mklml
+### mklml -->
+
 
 在使用 `SoonSpace.js` 过程中，最常用的加载模型手段是使用 `loadSbm` 去加载。虽然这样能直接达到加载模型的目的，但是对于后续的模型管理非常不利。
 
