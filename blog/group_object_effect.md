@@ -42,7 +42,7 @@ ssp.loadSbmToGroup(
   1. **调用 6 次 `loadSbm` 方法分别加载房间模型和家具模型**
   2. **调用 1 次 `loadSbm` 方法加载房间模型，用房间 ID 做为 Group ID 调用 1 次 `loadSbmToGroup` 把家具加载到一个组内**
 
-![加载方法](./imgs/group_object_effect/load-func.jpg)
+![加载方法](./images/group_object_effect/load-func.jpg)
 
 ## 1. 批量管理
 
@@ -89,27 +89,34 @@ ssp.loadSbm(
   }
 )
 ```
-![假设](./imgs/group_object_effect/if-load.jpg)
+![假设设计](./images/group_object_effect/if-load.jpg)
 
-这种设计方法有许多好处，例如数据结构直观、批量关联操作更简单。但不采用此设计方式的原因只有一个：**对象株连**。
+这种设计方法有许多好处，例如默认相对坐标系、批量关联操作更简单、数据结构直观...，但不采用此设计方式的原因只有一个：**对象株连**。
 
-那么用 `Group` 来实现一种假象的相对坐标是怎么做的：
+那么用 `Group` 来实现一种抽象的相对坐标是怎么做的：
 <br>
-其实很简单，用一句话描述：**把每一个空间对象都放到 `Group` 内，再为每一个有子集数据的空间对象创建一个 `Group`，同时把自身的世界坐标（包括其它空间属性）赋值给 `Group`。**
+其实很简单，用一句话描述：**把每个空间对象都放到 `Group` 内，并为每个有子集数据的空间对象创建一个 `Group` 用来管理子集，同时把自身的世界坐标（包括其它空间属性）赋值给 `Group`。**
 
-![组层级](./imgs/group_object_effect/group-level.jpg)
+![组层级](./images/group_object_effect/group-level.jpg)
 
 这里需要注意一点，根层级（大厦）的 Group ID 在数据层可能为空，需要自己处理。
 
 ## 3. 摆脱层次株连
 
-coding...
+什么是株连性：**指物体自身的的变化对家庭成员（包括父系和子系）具有相同作用的影响（古：株连九族），而我们接下来讲的都是物体对象对子系的株连影响。**
 
+最早看到**株连性**是在这一篇 [CSS元素隐藏](https://blog.csdn.net/weixin_34419326/article/details/94153217) 的文章中。
+如文章中描述，元素在使用 `display: none` 隐藏时会将子元素一起隐藏，而且子元素无论如何挣扎都无济于事。
+但是在 `CSS` 内有另一个隐藏属性 `visibility: hidden`，该属性在使用时子元素也会默认跟随隐藏，而只要给指定子元素设置 `visibility: visible` 就可以让其脱离父级影响单独显示出来，这就是 `visibility` 的魅力之一，也是摆脱层次株连的方法。
 
+同样的问题在空间场景内也存在，在空间对象树上任意节点控制其 `visible: false` 隐藏也会株连其子系对象不可见，且无论如何挣扎都无济于事。但不幸的是在空间内没有类似 `visibility` 的属性来摆脱株连，而需要开发者自己去修改空间对象几何体或者材质。
 
+因此，当遇到：**我不想看到房间，我只想关注其中一个家具设备** 这样的需求时，使用默认的空间对象树来加载场景便很难实现，当然是很难实现也不是完全不能实现。
+此时来回想采用 `Group` 加载方式是不是很好做到。
+![对象排列](./images/group_object_effect/object-layout.jpg)
+因此通过数据层级的关联关系就可以找到并操作任意对象。
 
-
-
+End!
 
 
 <!-- 在使用 `SoonSpace.js` 过程中，最常用的加载模型手段是使用 `loadSbm` 去加载。虽然这样能直接达到加载模型的目的，但是对于后续的模型管理非常不利。
@@ -130,7 +137,7 @@ coding...
 
 > 假设左上角为坐标 0,0，此处省略 z 轴。
 
-![group](./imgs/group.png)
+![group](./images/group.png)
 
 当移动了 `Group` 之后，内部 `Sbm` 对象的 `position` 是不变的，但是 `Sbm` 对于整个场景来说它的位置已经改变了。
 
