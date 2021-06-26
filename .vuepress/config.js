@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'SoonSpacejs Blog',
+  title: 'SoonSpace.js Blog',
   base: '/blog/',
   dest: 'dist',
   theme: 'reco',

@@ -1,5 +1,5 @@
 ---
-title: 在设计时 Group 的作用及能力
+title: 空间对象 Group 的作用及能力
 date: 2021-06-23
 author: 姜旗
 ---

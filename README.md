@@ -1,11 +1,11 @@
 ---
 home: true
-title: SoonSpacejs Blog
+title: SoonSpace.js Blog
 description: ' '
 bgImage: ./bg.png
 bgImageStyle: {
   height: '400px',
   padding: '24px',
-  align-items: flex-end
+  align-items: flex-start
 }
 ---
